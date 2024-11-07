@@ -1,8 +1,7 @@
 Changelog
 ---------
+## [1.3.0] - 2024-11-07
 - Add PHP 8.4 support (#74)
-
-## [1.3.0] - TBA
 - Drop support to Composer 1.x (#77)
 
 ## [1.2.0] - 2024-01-22
