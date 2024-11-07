@@ -24,9 +24,14 @@ jobs:
           - "8.3"
         deps:
           - "highest"
+        composer-options:
+          - "--prefer-dist"
         include:
           - php-version: "7.4"
             deps: "lowest"
+          - php-version: "8.4"
+            composer-options: "--prefer-dist --ignore-platform-req=php+"
+            
 
     steps:
       - name: "Checkout"
@@ -45,7 +50,7 @@ jobs:
         uses: ramsey/composer-install@v3
         with:
           dependency-versions: ${{ matrix.deps }}
-          composer-options: --prefer-dist
+          composer-options: ${{ matrix.composer-options }}
 
       - name: "Run PHPUnit"
         run: "vendor/bin/phpunit --coverage-clover=coverage.xml"
@@ -60,6 +65,8 @@ jobs:
       - name: "Run PHP-CS-Fixer (E2E test)"
         run: "vendor/bin/php-cs-fixer fix --dry-run --diff"
         if: "${{ matrix.deps != 'lowest' }}"
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: true
   Psalm:
     name: "Psalm"
     runs-on: "ubuntu-20.04"
