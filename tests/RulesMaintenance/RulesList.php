@@ -128,6 +128,7 @@ class RulesList
         return [
             'clean_namespace',
             'final_class',
+            'general_attribute_remove', // to be use manually
             'general_phpdoc_tag_rename',
             'header_comment',
             'no_blank_lines_before_namespace',
